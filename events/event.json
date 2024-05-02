@@ -1,0 +1,42 @@
+{
+  "version": "2.0",
+  "routeKey": "POST /api/Unit/GetActions",
+  "rawPath": "/default/nodejs-apig-function-1G3XMPLZXVXYI",
+  "rawQueryString": "",
+  "cookies": [
+      "s_fid=7AABXMPL1AFD9BBF-0643XMPL09956DE2",
+      "regStatus=pre-register"
+  ],
+  "headers": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      "accept-encoding": "gzip, deflate, br",
+      "authorization": "Bearer 6e5e5b6f0aeb4c68af086bbc788d4567da5bd8cb0cf54afaa86765fdeaeb4b5d614c5f86e9c54bc39ef662135e0795abc5245f8ae096432b8e69f81820d1d188110b450e1626471a95322338df8e1ad4f96502124570489289d6de9aa35e3b834a472cefd7ce46ebb6ee2a04509e4d82531f0a6a44094d53b9ea21427dff88b1",
+      "etc":"etc..."
+  },
+  "body" : {
+    "userId" : null, 
+    "unitId" : "e68254bc583b4bedbdecfa7c58f1439b", 
+    "deviceId" : null, 
+    "startTime" : "Mon, 12 Feb 2024 17:32:29 GMT",
+    "endTime" : null
+  },
+  "requestContext": {
+      "accountId": "123456789012",
+      "apiId": "r3pmxmplak",
+      "domainName": "r3pmxmplak.execute-api.us-east-2.amazonaws.com",
+      "domainPrefix": "r3pmxmplak",
+      "http": {
+          "method": "GET",
+          "path": "/default/nodejs-apig-function-1G3XMPLZXVXYI",
+          "protocol": "HTTP/1.1",
+          "sourceIp": "205.255.255.176",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+      },
+      "requestId": "JKJaXmPLvHcESHA=",
+      "routeKey": "ANY /nodejs-apig-function-1G3XMPLZXVXYI",
+      "stage": "default",
+      "time": "10/Mar/2020:05:16:23 +0000",
+      "timeEpoch": 1583817383220
+  },
+  "isBase64Encoded": true
+}

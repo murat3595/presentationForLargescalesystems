@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  PresentationExample
+  
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods: 
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+          - Accept
+          - Access-Control-Allow-Headers
+          - Access-Control-Request-Method
+          - Access-Control-Request-Headers
+
+  ##########API LAMBDAS#########
+  PresentationUserFunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PresentationExampleUserFunction
+      CodeUri: handlers/user-handler/
+      Handler: app.lambdaHandler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PresentationExampleUserTable
+      Layers:
+        - !Ref PresentationCommonLibs
+      Events:
+        Login:
+          Type: HttpApi 
+          Properties:
+            Path: /api/User
+            Method: post
+            ApiId:
+              Ref: HttpApi
+        GetUserInfo:
+          Type: HttpApi 
+          Properties:
+            Path: /api/User
+            Method: get
+            ApiId:
+              Ref: HttpApi
+
+  
+  #############LAYERS############
+  PresentationCommonLibs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: common-libs
+        Description: common-libs
+        ContentUri: common-layers/common-libs/
+        CompatibleRuntimes:
+          - nodejs20.x
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+    
+  #############TABLES############
+  PresentationExampleUserTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: PresentationExampleUser
+      AttributeDefinitions: 
+        - AttributeName: id  
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5

@@ -1,0 +1,27 @@
+trigger: none
+pool: 'Azure Pipelines'
+
+variables:
+  awsCredentials: "aws_toolkit_service_connection" # AWS Service Connection Name
+  awsRegionName: "eu-central-1" # AWS Region Name
+
+steps:
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: './common-layers/common-libs/nodejs'
+- task: AWSShellScript@1
+  displayName: 'Build'
+  inputs:
+    awsCredentials: $(awsCredentials)
+    regionName: $(awsRegionName)
+    scriptType: 'inline'
+    inlineScript: sam build
+    
+- task: AWSShellScript@1
+  displayName: 'Deploy Infrastructure'
+  inputs:
+      awsCredentials: $(awsCredentials)
+      regionName: $(awsRegionName)
+      scriptType: "inline"
+      inlineScript: yes | sam deploy
